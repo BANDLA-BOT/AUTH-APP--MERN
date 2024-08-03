@@ -11,7 +11,7 @@ var _bcryptjs = _interopRequireDefault(require("bcryptjs"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var signup = function signup(req, res) {
+var signup = function signup(req, res, next) {
   var _req$body, username, email, password, salt, hashedPassword, newUser;
 
   return regeneratorRuntime.async(function signup$(_context) {
@@ -44,10 +44,7 @@ var signup = function signup(req, res) {
         case 12:
           _context.prev = 12;
           _context.t0 = _context["catch"](6);
-          res.status(500).json({
-            Message: "Internal server error",
-            Error: _context.t0.message
-          });
+          next(_context.t0);
 
         case 15:
         case "end":
