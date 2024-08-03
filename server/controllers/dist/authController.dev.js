@@ -7,6 +7,8 @@ exports.signup = void 0;
 
 var _userModel = _interopRequireDefault(require("../models/user.model.js"));
 
+var _errorHandler = require("../utils/errorHandler.js");
+
 var _bcryptjs = _interopRequireDefault(require("bcryptjs"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
@@ -44,7 +46,7 @@ var signup = function signup(req, res, next) {
         case 12:
           _context.prev = 12;
           _context.t0 = _context["catch"](6);
-          next(_context.t0);
+          next((0, _errorHandler.errorHandler)(500, 'Something went wrong'));
 
         case 15:
         case "end":
