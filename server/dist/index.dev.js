@@ -8,16 +8,17 @@ var _dotenv = _interopRequireDefault(require("dotenv"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-_dotenv["default"].config(); //DATABASE
+_dotenv["default"].config();
 
+var app = (0, _express["default"])(); //DATABASE
 
 _mongoose["default"].connect(process.env.MONGO).then(function () {
   console.log('Connected to the Database');
 })["catch"](function (err) {
   console.log(err.message);
-});
+}); //LISTENING TO SERVER
 
-var app = (0, _express["default"])();
+
 app.listen(8000, function () {
   console.log('Server running on Port 3000');
 });

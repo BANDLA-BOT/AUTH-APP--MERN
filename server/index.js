@@ -2,6 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 dotenv.config()
+const app = express()
 
 //DATABASE
 mongoose.connect(process.env.MONGO)
@@ -12,8 +13,16 @@ mongoose.connect(process.env.MONGO)
     console.log(err.message)
 })
 
-const app = express()
 
+
+
+
+
+
+
+
+
+//LISTENING TO SERVER
 app.listen(8000, ()=>{
     console.log('Server running on Port 3000')
 })
