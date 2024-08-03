@@ -8,11 +8,14 @@ var _dotenv = _interopRequireDefault(require("dotenv"));
 
 var _userRoutes = _interopRequireDefault(require("./routes/userRoutes.js"));
 
+var _authRoute = _interopRequireDefault(require("./routes/authRoute.js"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 _dotenv["default"].config();
 
-var app = (0, _express["default"])(); //DATABASE
+var app = (0, _express["default"])();
+app.use(_express["default"].json()); //DATABASE
 
 _mongoose["default"].connect(process.env.MONGO).then(function () {
   console.log('Connected to the Databae');
@@ -23,6 +26,8 @@ _mongoose["default"].connect(process.env.MONGO).then(function () {
 
 app.listen(8000, function () {
   console.log('Server running on Port 000');
-});
+}); //API's
+
 app.use('/api/user', _userRoutes["default"]);
+app.use('/api/auth', _authRoute["default"]);
 //# sourceMappingURL=index.dev.js.map
