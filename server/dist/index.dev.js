@@ -6,6 +6,8 @@ var _mongoose = _interopRequireDefault(require("mongoose"));
 
 var _dotenv = _interopRequireDefault(require("dotenv"));
 
+var _cors = _interopRequireDefault(require("cors"));
+
 var _userRoutes = _interopRequireDefault(require("./routes/userRoutes.js"));
 
 var _authRoute = _interopRequireDefault(require("./routes/authRoute.js"));
@@ -15,6 +17,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 _dotenv["default"].config();
 
 var app = (0, _express["default"])();
+app.use((0, _cors["default"])());
 app.use(_express["default"].json()); //DATABASE
 
 _mongoose["default"].connect(process.env.MONGO).then(function () {

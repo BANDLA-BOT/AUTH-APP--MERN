@@ -1,10 +1,12 @@
 import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
+import cors from 'cors'
 import userRoutes from './routes/userRoutes.js'
 import authRoute from './routes/authRoute.js'
 dotenv.config()
 const app = express()
+app.use(cors())
 app.use(express.json())
 
 //DATABASE
