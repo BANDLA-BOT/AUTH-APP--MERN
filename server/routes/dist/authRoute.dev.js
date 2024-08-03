@@ -14,6 +14,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 var router = _express["default"].Router();
 
 router.post('/signup', _authController.signup);
+router.post('/login', _authController.login);
 var _default = router;
 exports["default"] = _default;
 //# sourceMappingURL=authRoute.dev.js.map
