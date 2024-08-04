@@ -132,7 +132,8 @@ var login = function login(req, res, next) {
             httpOnly: true,
             expires: expiryDate
           }).status(200).json({
-            user: rest
+            user: rest,
+            message: "Logged in"
           });
           _context2.next = 19;
           break;
