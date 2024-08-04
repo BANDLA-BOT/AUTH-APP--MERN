@@ -1,35 +1,35 @@
 import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+} from "../redux/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 const SignIn = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.user);
+
   const [formData, setFormData] = useState({});
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
   const handleSubmit = async (e) => {
-    try {
-      setLoading(true);
-      e.preventDefault();
-      await axios
-        .post("/api/auth/login", formData)
-        .then((res) => {
-          if(res.data.message){
-            setLoading(false)
-            // setError(false)
-            navigate('/')
-          }
-          console.log(res.data.user)
-        })
-        .catch((error) => {
-         console.log(error)
-        });
-    } catch (error) {
-      console.log('Something went wrong')
-    }
+    e.preventDefault();
+    dispatch(signInStart());
+    await axios.post("/api/auth/login", formData)
+    .then((res)=>{
+      if(res.data.login){
+        dispatch(signInSuccess(res.data.user))
+        navigate('/')
+      }
+    })
+    .catch((err)=>{
+      console.log(err)
+      dispatch(signInFailure(err.message))
+    })
   };
 
   return (
@@ -50,7 +50,7 @@ const SignIn = () => {
           className="bg-slate-100 p-3 rounded-lg"
           onChange={handleChange}
         />
-        <button  className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95">
+        <button className="bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95">
           Sign In
         </button>
       </form>
@@ -60,7 +60,7 @@ const SignIn = () => {
           <span className="text-blue-500">Sign Up</span>
         </Link>
       </div>
-      <p className="text-red-600 mt-3">{error && "Something went wrong"}</p>
+      <p  className="text-red-700 mt-3">{!error ? <p>{error}</p>:'Something went wrong!'}</p>
     </div>
   );
 };

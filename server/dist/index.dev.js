@@ -32,15 +32,5 @@ app.listen(8000, function () {
 }); //API's
 
 app.use('/api/user', _userRoutes["default"]);
-app.use('/api/auth', _authRoute["default"]); //ERROR HANDLING MIDDLEWARE
-
-app.use(function (err, req, res, next) {
-  var statusCode = err.statusCode || 500;
-  var message = err.message || 'Internal server error';
-  return res.status(statusCode).json({
-    success: false,
-    message: message,
-    statusCode: statusCode
-  });
-});
+app.use('/api/auth', _authRoute["default"]);
 //# sourceMappingURL=index.dev.js.map
